@@ -1,0 +1,1 @@
+function MainController($scope){$scope.write="hello world"}angular.module("app").controller("MainController",["$scope",MainController]);
