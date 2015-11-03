@@ -25,40 +25,7 @@ app.config(['$routeProvider', function ($routeProvider){
 
 
  // Main Controller Setup
- app.controller('MainController', ['$scope','dataService', MainController]);
- function MainController ($scope, dataService){
-  $scope.countryData = dataService.getAllCountries();
+ app.controller('MainController', ['$scope', MainController]);
+ function MainController ($scope){
   $scope.hello = 'hello';
-  console.log('blah');
  }
-
-
-// Service to retrieve country data
-app.factory('dataService',['$http', '$q', dataService]);
-
-function dataService ($http, $q){
-  return {
-    getAllCountries: getAllCountries
-  };
-
-
-  function getAllCountries(){
-     return $http({
-      method: 'GET',
-      url: 'api.geonames.org/countryInfo?username=demo'
-     })
-     .then(sendCountryData)
-     .catch(sendErrorMessage);
-  }
-
-  function sendCountryData (response){
-    return response.data;
-   }
-
-   function sendErrorMessage (response){
-    return $q.reject('Error retrieving countries data. (HTTP status: ' + response.status + ')');
-   }
-
-}
-
-
