@@ -1,10 +1,11 @@
- var app = angular.module('app', [
+var app =  angular.module('app', [
   'ngRoute'
 ]);
 
 
+
  // Route configurations
-app.config(['$routeProvider', function ($routeProvider){
+angular.module('app').config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
     templateUrl: 'partials/home.html',
     controller: 'MainController'
@@ -25,40 +26,36 @@ app.config(['$routeProvider', function ($routeProvider){
 
 
  // Main Controller Setup
- app.controller('MainController', ['$scope','dataService', MainController]);
- function MainController ($scope, dataService){
-  $scope.countryData = dataService.getAllCountries();
-  $scope.hello = 'hello';
-  console.log('blah');
+app.controller('MainController', ['$scope', 'dataService', MainController]);
+
+function MainController ($scope, dataService){
+    $scope.countries = dataService.getAllCountries();
+    $Sscope.hello = 'hello';
+    console.log($scope.countries);
  }
 
+ // service configurations
+ app.factory('dataService', ['$q', '$http', dataService]);
 
-// Service to retrieve country data
-app.factory('dataService',['$http', '$q', dataService]);
+ function dataService ($q, $http){
+    return {
+      getAllCountries: getAllCountries
+    };
 
-function dataService ($http, $q){
-  return {
-    getAllCountries: getAllCountries
-  };
+    function getAllCountries (){
+      return $http({
+        method: 'GET',
+        url: 'http://api.geonames.org/countryInfoJSON?username=jet1991'
+      })
+      .then(sendCountries)
+      .catch(sendErrorMessage);
+    }
 
+    function sendCountries (response) {
+      return response.data;
+    }
 
-  function getAllCountries(){
-     return $http({
-      method: 'GET',
-      url: 'api.geonames.org/countryInfo?username=demo'
-     })
-     .then(sendCountryData)
-     .catch(sendErrorMessage);
-  }
-
-  function sendCountryData (response){
-    return response.data;
-   }
-
-   function sendErrorMessage (response){
-    return $q.reject('Error retrieving countries data. (HTTP status: ' + response.status + ')');
-   }
-
-}
-
-
+    function sendErrorMessage (response) {
+      return $q.reject('There was an error getting the data. (HTTP status: ' + response.status + ')' );
+    }
+ }
