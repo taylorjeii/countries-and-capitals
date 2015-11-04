@@ -30,6 +30,7 @@ app.controller('MainController', ['$scope', 'dataService', MainController]);
 
 function MainController ($scope, dataService){
     $scope.countries = dataService.getAllCountries();
+    $scope.working = 'working';
     console.log($scope.countries);
  }
 
@@ -44,7 +45,7 @@ function MainController ($scope, dataService){
     function getAllCountries (){
       return $http({
         method: 'GET',
-        url: 'http://api.geonames.org/countryInfoJSON?username=jet1991'
+        url: 'http://api.geonames.org/countryInfoJSON?username=demo'
       })
       .then(sendCountries)
       .catch(sendErrorMessage);
