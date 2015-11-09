@@ -29,9 +29,10 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
 app.controller('MainController', ['$scope', 'dataService', MainController]);
 
 function MainController ($scope, dataService){
-    $scope.countries = dataService.getAllCountries();
-    $scope.working = 'working';
-    console.log($scope.countries);
+    dataService.getAllCountries()
+      .then(function(result){
+        $scope.countries = result.geonames;
+      });
  }
 
  // service configurations
