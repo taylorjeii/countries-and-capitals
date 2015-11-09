@@ -1,6 +1,10 @@
 <h1>Country List</h1>
 <a href="#details"><button class="btn">Countries Details</button></a>
-<p>{{countries}}</p>
-<p>{{working}}</p>
+<ul>
+  <li ng-repeat="country in countries">
+    {{country.countryName}}
+  </li>
+</ul>
+<p>cool</p>
 
 <!-- <p>{{countryData}}</p> -->
