@@ -29,9 +29,16 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
 app.controller('MainController', ['$scope', 'dataService', MainController]);
 
 function MainController ($scope, dataService){
+<<<<<<< HEAD
     $scope.countries = dataService.getAllCountries();
     $Sscope.hello = 'hello';
     console.log($scope.countries);
+=======
+    dataService.getAllCountries()
+      .then(function(result){
+        $scope.countries = result.geonames;
+      });
+>>>>>>> ad3091d120dabcbc38b3f6c8e1ce5e756233fefb
  }
 
  // service configurations
@@ -45,7 +52,7 @@ function MainController ($scope, dataService){
     function getAllCountries (){
       return $http({
         method: 'GET',
-        url: 'http://api.geonames.org/countryInfoJSON?username=jet1991'
+        url: 'http://api.geonames.org/countryInfoJSON?username=demo'
       })
       .then(sendCountries)
       .catch(sendErrorMessage);
