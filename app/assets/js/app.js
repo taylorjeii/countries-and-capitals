@@ -14,8 +14,8 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
     templateUrl: 'partials/countriesList.html',
     controller: 'MainController'
   })
-  .when('/details', {
-    templateUrl: 'partials/countryDetails.html',
+  .when('/details/:country', {
+    templateUrl: 'partials/country.html',
     controller: 'MainController'
   })
   .otherwise({
@@ -32,6 +32,7 @@ function MainController ($scope, dataService){
     dataService.getAllCountries()
       .then(function(result){
         $scope.countries = result.geonames;
+        console.log($scope.countries);
       });
  }
 

@@ -1,11 +1,24 @@
 <h1>Country List</h1>
-<a href="#details"><button class="btn">Countries Details</button></a>
-<p>{{hello}}</p>
-
-<ul>
-  <li ng-repeat="country in countries">
-    {{country.countryName}}
-  </li>
-</ul>
-
+<!-- <a href="#details"><button class="btn">Countries Details</button></a> -->
+<!-- <th>{{country.countryName}}</th> -->
+<table class="table table-hover table-responsive table-border">
+  <tr>
+    <th></th>
+    <th>Country name</th>
+    <th>Country Code</th>
+    <th>Capital</th>
+    <th>Area in km<sup>2</sup></th>
+    <th>Continent</th>
+    <th>Population</th>
+  </tr>
+  <tr ng-repeat="country in countries">
+    <td><a href="#/details/{{country.countryName}}" class="btn btn-small btn-primary">Learn More</a></td>
+    <td>{{country.countryName}}</td>
+    <td>{{country.countryCode}}</td>
+    <td>{{country.capital}}</td>
+    <td>{{country.areaInSqKm | number:0 }}</td>
+    <td>{{country.continentName}}</td>
+    <td>{{country.population | number:0 }}</td>
+  </tr>
+</table>
 
