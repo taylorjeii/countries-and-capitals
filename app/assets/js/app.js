@@ -5,7 +5,7 @@ var app =  angular.module('app', [
 
 
  // Route configurations
-angular.module('app').config(['$routeProvider', function ($routeProvider){
+app.config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
     templateUrl: 'partials/home.html',
     controller: 'MainController'
@@ -29,6 +29,7 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
 app.controller('MainController', ['$scope', 'dataService', MainController]);
 
 function MainController ($scope, dataService){
+
     dataService.getAllCountries()
       .then(function(result){
         $scope.countries = result.geonames;
