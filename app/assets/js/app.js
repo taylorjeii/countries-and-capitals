@@ -1,6 +1,5 @@
 var app =  angular.module('app', [
-  'ngRoute',
-  'angularUtils.directives.dirPagination'
+  'ngRoute'
 ]);
 
 
@@ -9,68 +8,32 @@ var app =  angular.module('app', [
 app.config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
     templateUrl: 'partials/home.html',
-    controller: 'HomeController'
+    controller: 'MainController'
   })
   .when('/countries', {
     templateUrl: 'partials/countriesList.html',
-    controller: 'MainController',
-    resolve: {
-      countriesData: ['dataService', function(dataService){
-        return  dataService.getAllCountries();
-      }]
-    }
+    controller: 'MainController'
   })
   .when('/details/:country', {
     templateUrl: 'partials/country.html',
-    controller: 'CountryListController'
+    controller: 'MainController'
   })
   .otherwise({
     redirectTo: '/'
   });
 }]);
 
-// Main Controller Setup
-app.controller('HomeController', ['$scope', HomeController]);
-
-function HomeController ($scope){
-
- }
 
  // Main Controller Setup
-app.controller('MainController', ['$scope', '$routeParams' , 'countriesData', MainController]);
+app.controller('MainController', ['$scope', '$routeParams' , 'dataService', MainController]);
 
-function MainController ($scope, $routeParams, countriesData){
-    console.log(countriesdata);
-    $scope.countries = countriesData;
+function MainController ($scope, $routeParams, dataService){
     $scope.country = $routeParams.country;
-    $scope.area = '';
-    $scope.capital = '';
-    $scope.capitalPop = '';
-    $scope.neighbors = '';
-
-    // dataService.getAllCountries()
-    //   .then(function(result){
-    //     $scope.countries = result.geonames;
-    //     console.log($scope.countries);
-    //   });
- }
-
- // Main Controller Setup
-app.controller('CountryListController', ['$scope', '$routeParams' , CountryListController]);
-
-function CountryListController ($scope, $routeParams){
-    console.log(countriesdata);
-    $scope.country = $routeParams.country;
-    // $scope.area = '';
-    // $scope.capital = '';
-    // $scope.capitalPop = '';
-    // $scope.neighbors = '';
-
-    // dataService.getAllCountries()
-    //   .then(function(result){
-    //     $scope.countries = result.geonames;
-    //     console.log($scope.countries);
-    //   });
+    dataService.getAllCountries()
+      .then(function(result){
+        $scope.countries = result.geonames;
+        console.log($scope.countries);
+      });
  }
 
  // service configurations
@@ -78,10 +41,8 @@ function CountryListController ($scope, $routeParams){
 
  function dataService ($q, $http){
     return {
-      getAllCountries: getAllCountries,
-      getNeighbors: getNeighbors
+      getAllCountries: getAllCountries
     };
-
 
     function getAllCountries (){
       return $http({
