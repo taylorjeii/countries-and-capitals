@@ -1,5 +1,6 @@
 var app =  angular.module('app', [
-  'ngRoute'
+  'ngRoute',
+  'angularUtils.directives.dirPagination'
 ]);
 
 
@@ -12,7 +13,12 @@ app.config(['$routeProvider', function ($routeProvider){
   })
   .when('/countries', {
     templateUrl: 'partials/countriesList.html',
-    controller: 'MainController'
+    controller: 'MainController',
+    resolve: {
+      countriesData: ['dataService', function(dataService){
+        return  dataService.getAllCountries();
+      }]
+    }
   })
   .when('/details/:country', {
     templateUrl: 'partials/country.html',
@@ -24,17 +30,22 @@ app.config(['$routeProvider', function ($routeProvider){
 }]);
 
 
-
  // Main Controller Setup
-app.controller('MainController', ['$scope', '$routeParams' , 'dataService', MainController]);
+app.controller('MainController', ['$scope', '$routeParams' , 'countriesData', MainController]);
 
-function MainController ($scope, $routeParams, dataService){
+function MainController ($scope, $routeParams, countriesData){
+    $scope.countries = countriesData;
     $scope.country = $routeParams.country;
-    dataService.getAllCountries()
-      .then(function(result){
-        $scope.countries = result.geonames;
-        console.log($scope.countries);
-      });
+    $scope.area = '';
+    $scope.capital = '';
+    $scope.capitalPop = '';
+    $scope.neighbors = '';
+
+    // dataService.getAllCountries()
+    //   .then(function(result){
+    //     $scope.countries = result.geonames;
+    //     console.log($scope.countries);
+    //   });
  }
 
  // service configurations
@@ -42,8 +53,10 @@ function MainController ($scope, $routeParams, dataService){
 
  function dataService ($q, $http){
     return {
-      getAllCountries: getAllCountries
+      getAllCountries: getAllCountries,
+      getNeighbors: getNeighbors
     };
+
 
     function getAllCountries (){
       return $http({

@@ -3,7 +3,6 @@
 <!-- <th>{{country.countryName}}</th> -->
 <table class="table table-hover table-responsive table-border">
   <tr>
-    <th></th>
     <th>Country name</th>
     <th>Country Code</th>
     <th>Capital</th>
@@ -15,9 +14,11 @@
     <td><a ng-href="#/details/{{country.countryName}}" class="country-name">{{country.countryName}}</a></td>
     <td>{{country.countryCode}}</td>
     <td>{{country.capital}}</td>
-    <td>{{country.areaInSqKm | number:0 }}</td>
+    <td>{{country.areaInSqKm | number:0}}</td>
     <td>{{country.continentName}}</td>
-    <td>{{country.population | number:0 }}</td>
+    <td>{{country.population | number:0}}</td>
   </tr>
 </table>
+
+
 
