@@ -82,6 +82,7 @@ module.exports = function (grunt){
           './app/bower_components/jquery/dist/jquery.min.js',
           './app/bower_components/angular/angular.min.js',
           './app/bower_components/angular-route/angular-route.min.js',
+          './app/bower_components/angular-utils-pagination/dirPagination.js',
           './app/bower_components/angular-animate/angular-animate.min.js',
           './app/bower_components/bootstrap/dist/js/bootstrap.min.js'
         ],
@@ -154,7 +155,6 @@ module.exports = function (grunt){
     }
 
   });
-
 
 
   grunt.loadNpmTasks('grunt-contrib-clean');
