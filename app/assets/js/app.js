@@ -7,17 +7,22 @@ var app =  angular.module('app', [
  // Route configurations
 app.config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
-    templateUrl: 'partials/home.html',
-    controller: 'MainController'
-  })
+    templateUrl: 'partials/home.html'
+    })
   .when('/countries', {
     templateUrl: 'partials/countriesList.html',
-    controller: 'MainController'
+    controller: 'ListController',
+    resolve: {
+      countryList: ['dataService', function(dataService) {
+
+        return dataService.getAllCountries();
+      }]
+    }
   })
-  .when('/details/:country', {
-    templateUrl: 'partials/country.html',
-    controller: 'MainController'
-  })
+  // .when('/details/:country', {
+  //   templateUrl: 'partials/country.html',
+  //   controller: 'MainController'
+  // })
   .otherwise({
     redirectTo: '/'
   });
@@ -25,15 +30,17 @@ app.config(['$routeProvider', function ($routeProvider){
 
 
  // Main Controller Setup
-app.controller('MainController', ['$scope', '$routeParams' , 'dataService', MainController]);
+app.controller('ListController', ['$scope','countryList', ListController]);
 
-function MainController ($scope, $routeParams, dataService){
-    $scope.country = $routeParams.country;
-    dataService.getAllCountries()
-      .then(function(result){
-        $scope.countries = result.geonames;
-        console.log($scope.countries);
-      });
+function ListController ($scope, countryList){
+  
+    $scope.countries = countryList;
+    console.log($scope.country);
+    // dataService.getAllCountries()
+    //   .then(function(result){
+    //     $scope.countries = result.geonames;
+    //     console.log($scope.countries);
+    //   });
  }
 
  // service configurations
@@ -47,14 +54,14 @@ function MainController ($scope, $routeParams, dataService){
     function getAllCountries (){
       return $http({
         method: 'GET',
-        url: 'http://api.geonames.org/countryInfoJSON?username=demo'
+        url: 'http://api.geonames.org/countryInfoJSON?username=atoburen'
       })
       .then(sendCountries)
       .catch(sendErrorMessage);
     }
 
     function sendCountries (response) {
-      return response.data;
+      return response.data.geonames;
     }
 
     function sendErrorMessage (response) {
