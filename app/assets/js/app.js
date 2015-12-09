@@ -14,7 +14,6 @@ app.config(['$routeProvider', function ($routeProvider){
     controller: 'ListController',
     resolve: {
       countryList: ['dataService', function(dataService) {
-
         return dataService.getAllCountries();
       }]
     }
