@@ -43,10 +43,10 @@ module.exports = function (grunt){
     uglify: {
       development: {
           files: [{
-              expand: true,
-              cwd: './app/assets/js/',
-              src: '*.js',
-              dest: './app/assets/js/ugly/',
+              './app/assets/js/ugly/ugly.js': ['./app/assets/js/app.js',
+                  './app/assets/js/controllers/ListController.js',
+                  './app/assets/js/controllers/CountryDetailController.js',
+                  './app/assets/js/dataService.js']
           }]
       },
       options: {

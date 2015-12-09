@@ -1,11 +1,11 @@
-var app =  angular.module('app', [
-  'ngRoute'
-]);
+angular.module('app', ['ngRoute'])
+  .constant('COUNTRY_DATA_URL', 'http://api.geonames.org/countryInfoJSON')
+  .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON');
 
 
 
  // Route configurations
-app.config(['$routeProvider', function ($routeProvider){
+angular.module('app').config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
     templateUrl: 'partials/home.html'
     })
@@ -18,52 +18,28 @@ app.config(['$routeProvider', function ($routeProvider){
       }]
     }
   })
-  // .when('/details/:country', {
-  //   templateUrl: 'partials/country.html',
-  //   controller: 'MainController'
-  // })
+  .when('/details/:country/:capital', {
+    templateUrl: 'partials/country.html',
+    controller: 'CountryDetailController',
+    resolve: {
+      capital: ['$route', 'dataService', function($route, dataService){
+        var country = $route.current.params.country;
+        var capital = $route.current.params.capital;
+        return dataService.getCapital(country, capital);
+      }]
+    }
+  })
   .otherwise({
     redirectTo: '/'
   });
 }]);
 
 
- // Main Controller Setup
-app.controller('ListController', ['$scope','countryList', ListController]);
 
-function ListController ($scope, countryList){
-  
-    $scope.countries = countryList;
-    console.log($scope.country);
-    // dataService.getAllCountries()
-    //   .then(function(result){
-    //     $scope.countries = result.geonames;
-    //     console.log($scope.countries);
-    //   });
- }
 
- // service configurations
- app.factory('dataService', ['$q', '$http', dataService]);
 
- function dataService ($q, $http){
-    return {
-      getAllCountries: getAllCountries
-    };
 
-    function getAllCountries (){
-      return $http({
-        method: 'GET',
-        url: 'http://api.geonames.org/countryInfoJSON?username=atoburen'
-      })
-      .then(sendCountries)
-      .catch(sendErrorMessage);
-    }
 
-    function sendCountries (response) {
-      return response.data.geonames;
-    }
 
-    function sendErrorMessage (response) {
-      return $q.reject('There was an error getting the data. (HTTP status: ' + response.status + ')' );
-    }
- }
+
+
