@@ -22,11 +22,11 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
     templateUrl: 'partials/country.html',
     controller: 'CountryDetailController',
     resolve: {
-      capital: ['$route', 'dataService', function($route, dataService){
+      population: ['$route', 'dataService', function($route, dataService){
         var country = $route.current.params.country;
         var capital = $route.current.params.capital;
         console.log(capital);
-        return dataService.getCapital(country, capital);
+        return dataService.getCapitalPopulation(country, capital);
       }]
     }
   })

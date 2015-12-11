@@ -2,7 +2,8 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
 
  function dataService ($q, $http, COUNTRY_DATA_URL, CAPITAL_DATA_URL){
     return {
-      getAllCountries: getAllCountries
+      getAllCountries: getAllCountries,
+      getCapitalPopulation: getCapitalPopulation
    
     };
 
@@ -24,7 +25,7 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
     }
 
 
-    function getCapital(country, capital){
+    function getCapitalPopulation(country, capital){
       var config = {
         cache: true,
         params: {
@@ -37,10 +38,10 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
         }
       };
       return $http.get(CAPITAL_DATA_URL, config)
-              .then(sendCapital)
+              .then(sendCapitalPopulation)
               .catch(sendErrorMessage);
 
-        function sendCapital (response) {
+        function sendCapitalPopulation (response) {
         return response.data;
       }
     }
