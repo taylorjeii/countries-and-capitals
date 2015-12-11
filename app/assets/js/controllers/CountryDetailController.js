@@ -1,7 +1,7 @@
-angular.module('app').controller('CountryDetailController', ['$scope','$routeParams', 'capital', CountryDetailController]);
+angular.module('app').controller('CountryDetailController', ['$scope','$routeParams', CountryDetailController]);
 
-function CountryDetailController($scope, $routeParams, capital){
+function CountryDetailController($scope, $routeParams){
   $scope.country = $routeParams.country;
-  $scope.capital = capital;
+  $scope.capital = $routeParams.capital;
   console.log( 'country: ' + $scope.country + '. capital: ' + $scope.capital);
 }

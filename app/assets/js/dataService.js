@@ -2,8 +2,8 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
 
  function dataService ($q, $http, COUNTRY_DATA_URL, CAPITAL_DATA_URL){
     return {
-      getAllCountries: getAllCountries,
-      getCapital: getCapital
+      getAllCountries: getAllCountries
+   
     };
 
     // get all countries

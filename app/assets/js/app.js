@@ -25,6 +25,7 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
       capital: ['$route', 'dataService', function($route, dataService){
         var country = $route.current.params.country;
         var capital = $route.current.params.capital;
+        console.log(capital);
         return dataService.getCapital(country, capital);
       }]
     }
