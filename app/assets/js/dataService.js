@@ -1,9 +1,11 @@
-angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL', 'CAPITAL_DATA_URL', dataService]);
+angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL', 'CAPITAL_DATA_URL', 'NEIGHBORS_DATA_URL', dataService]);
 
- function dataService ($q, $http, COUNTRY_DATA_URL, CAPITAL_DATA_URL){
+ function dataService ($q, $http, COUNTRY_DATA_URL, CAPITAL_DATA_URL, NEIGHBORS_DATA_URL){
     return {
       getAllCountries: getAllCountries,
-      getCapitalPopulation: getCapitalPopulation
+      getCountry: getCountry,
+      getCapital: getCapital,
+      getNeighbors: getNeighbors
     };
 
     // get all countries
@@ -23,8 +25,26 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
       }
     }
 
-    // get the population of the countres capital
-    function getCapitalPopulation(countryCode, capital){
+    // get individual country
+    function getCountry (country){
+      var config = {
+        cache: true,
+        params: {
+          username: 'atoburen',
+          country: country
+        }
+      };
+      return $http.get(COUNTRY_DATA_URL, config)
+              .then(sendCountry)
+              .catch(sendErrorMessage);
+
+        function sendCountry (response) {
+        return response.data.geonames[0];
+      }
+    }
+
+    // get the countries capital
+    function getCapital(country, capital){
       var config = {
         cache: true,
         params: {
@@ -33,19 +53,39 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
           maxRows: 1,
           q: capital,
           name_equals: capital,
-          countryCode: countryCode,
+          country: country,
           isNameRequired: true
         }
       };
       return $http.get(CAPITAL_DATA_URL, config)
-              .then(sendCapitalPopulation)
+              .then(sendCapital)
               .catch(sendErrorMessage);
 
-        function sendCapitalPopulation (response) {
-        return response.data.geonames[0].population;
-
+        function sendCapital (response) {
+        return response.data.geonames[0];
       }
     }
+
+    // get the neighbors of the country
+    function getNeighbors(country){
+      var config = {
+        cache: true,
+        params: {
+          username: 'atoburen',
+          country: country
+        }
+      };
+
+      return $http.get(NEIGHBORS_DATA_URL, config)
+              .then(sendNeighbors)
+              .catch(sendErrorMessage);
+
+      function sendNeighbors(response){
+        return response.data.geonames;
+      }
+    }
+
+
 
 
     // response if there is an error retrieving the data

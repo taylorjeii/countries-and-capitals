@@ -1,11 +1,14 @@
-<h1>{{country}}</h1>
+<h1>{{country.countryName}}</h1>
 
 <ul class="inline-list">
-  <li>Country Population: {{countryPopulation | number}}</li>
-  <li>Country Area: {{countryArea | number}} km<sup>2</sup></li>
-  <li>Country Capital: {{capital}}</li>
-  <li>Capital Population: {{capitalPopulation | number}}</li>
-  <li>Neighboring Countries</li>
+  <li>Country Population: {{country.population | number}}</li>
+  <li>Country Area: {{country.areaInSqKm | number}} km<sup>2</sup></li>
+  <li>Country Capital: {{country.capital}}</li>
+  <li>Capital Population: {{capital.population | number}}</li>
+</ul>
+
+<ul class="list-inline">
+  <li ng-repeat="neighbor in neighbors"><a href="#/details/{{neighbor.countryCode}}/{{neighbor.name}}">{{neighbor.countryName}}</a></li>
 </ul>
 <a href="#countries"><button class="btn">back</button></a>
-<a href="#home"><button class="btn">Home</button></a>
+<a href="#"><button class="btn">Home</button></a>

@@ -1,6 +1,7 @@
 angular.module('app', ['ngRoute'])
   .constant('COUNTRY_DATA_URL', 'http://api.geonames.org/countryInfoJSON')
-  .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON');
+  .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON')
+  .constant('NEIGHBORS_DATA_URL', 'http://api.geonames.org/neighboursJSON');
 
 
 angular.module('app').config(['$routeProvider', function ($routeProvider){
@@ -16,20 +17,28 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
       }]
     }
   })
-  .when('/details/:country/:countryCode/:countryPopulation/:capital/:countryArea', {
+  .when('/details/:country/:capital', {
     templateUrl: 'partials/country.html',
     controller: 'CountryDetailController',
     resolve: {
-      capitalPopulation: ['$route', 'dataService', function($route, dataService){
-        var countryCode = $route.current.params.countryCode;
+      country: ['$route', 'dataService', function($route, dataService){
+        var country = $route.current.params.country;
+        return dataService.getCountry(country);
+      }],
+      countryCapital: ['$route', 'dataService', function($route, dataService){
+        var country = $route.current.params.country;
         var capital = $route.current.params.capital;
-        return dataService.getCapitalPopulation(countryCode, capital);
+        return dataService.getCapital(country, capital);
+      }],
+      countryNeighbors: ['$route', 'dataService', function($route, dataService){
+        var country = $route.current.params.country;
+        return dataService.getNeighbors(country);
       }]
     }
-  })
-  .otherwise({
-    redirectTo: '/'
   });
+  // .otherwise({
+  //   redirectTo: '/'
+  // });
 }]);
 
 
