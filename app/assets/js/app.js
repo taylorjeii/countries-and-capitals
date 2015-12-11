@@ -3,8 +3,6 @@ angular.module('app', ['ngRoute'])
   .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON');
 
 
-
- // Route configurations
 angular.module('app').config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
     templateUrl: 'partials/home.html'
@@ -18,14 +16,14 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
       }]
     }
   })
-  .when('/details/:country/:capital', {
+  .when('/details/:country/:countryCode/:countryPopulation/:capital/:countryArea', {
     templateUrl: 'partials/country.html',
     controller: 'CountryDetailController',
     resolve: {
-      capital: ['$route', 'dataService', function($route, dataService){
-        var country = $route.current.params.country;
+      capitalPopulation: ['$route', 'dataService', function($route, dataService){
+        var countryCode = $route.current.params.countryCode;
         var capital = $route.current.params.capital;
-        return dataService.getCapital(country, capital);
+        return dataService.getCapitalPopulation(countryCode, capital);
       }]
     }
   })

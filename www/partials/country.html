@@ -1,10 +1,10 @@
 <h1>{{country}}</h1>
 
 <ul class="inline-list">
-  <li>Country Population: </li>
-  <li>Country Area:</li>
+  <li>Country Population: {{countryPopulation | number}}</li>
+  <li>Country Area: {{countryArea | number}} km<sup>2</sup></li>
   <li>Country Capital: {{capital}}</li>
-  <li>Capital Population:</li>
+  <li>Capital Population: {{capitalPopulation | number}}</li>
   <li>Neighboring Countries</li>
 </ul>
 <a href="#countries"><button class="btn">back</button></a>

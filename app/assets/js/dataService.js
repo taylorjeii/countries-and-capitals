@@ -3,7 +3,7 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
  function dataService ($q, $http, COUNTRY_DATA_URL, CAPITAL_DATA_URL){
     return {
       getAllCountries: getAllCountries,
-      getCapital: getCapital
+      getCapitalPopulation: getCapitalPopulation
     };
 
     // get all countries
@@ -23,25 +23,27 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
       }
     }
 
-
-    function getCapital(country, capital){
+    // get the population of the countres capital
+    function getCapitalPopulation(countryCode, capital){
       var config = {
         cache: true,
         params: {
           username: 'atoburen',
           lang: "en",
+          maxRows: 1,
           q: capital,
           name_equals: capital,
-          country: country,
+          countryCode: countryCode,
           isNameRequired: true
         }
       };
       return $http.get(CAPITAL_DATA_URL, config)
-              .then(sendCapital)
+              .then(sendCapitalPopulation)
               .catch(sendErrorMessage);
 
-        function sendCapital (response) {
-        return response.data;
+        function sendCapitalPopulation (response) {
+        return response.data.geonames[0].population;
+
       }
     }
 
