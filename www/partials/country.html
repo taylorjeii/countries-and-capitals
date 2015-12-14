@@ -8,7 +8,14 @@
 </ul>
 
 <ul class="list-inline">
-  <li ng-repeat="neighbor in neighbors"><a href="#/details/{{neighbor.countryCode}}/{{neighbor.name}}">{{neighbor.countryName}}</a></li>
+  <li ng-repeat="neighbor in neighbors"><a ng-href="#/details/{{neighbor.countryCode}}/{{neighbor.name}}">{{neighbor.countryName}}</a></li>
 </ul>
+
+<img src="http://www.geonames.org/flags/x/{{country.countryCode | lowercase}}.gif" />
+<!-- <img id='myImage' src="http://www.geonames.org/img/country/250/{{country.countryCode | uppercase}}.png" /> -->
+<div class="angular-google-map-container">
+  <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+</div>
+
 <a href="#countries"><button class="btn">back</button></a>
-<a href="#"><button class="btn">Home</button></a>
+<a href="#/"><button class="btn">Home</button></a>

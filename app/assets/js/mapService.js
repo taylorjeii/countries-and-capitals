@@ -1,0 +1,1 @@
+angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL', 'CAPITAL_DATA_URL', 'NEIGHBORS_DATA_URL', dataService]);
