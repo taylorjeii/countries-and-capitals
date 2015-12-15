@@ -91,16 +91,6 @@ module.exports = function (grunt){
         dest: './www/js/vendors.js'
       }
     },
-    imagemin: {
-      all: {
-        files: [{
-          expand: true,
-          cwd: './app//assets/images/',
-          src: ['**/*.{jpg,png}'],
-          dest: './www/images/'
-        }]
-      }
-    },
 
     // compass
     compass: {
@@ -173,7 +163,6 @@ module.exports = function (grunt){
   grunt.loadNpmTasks('grunt-htmlhint');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.registerTask("default", [
       'clean',
       'jshint',
@@ -181,8 +170,7 @@ module.exports = function (grunt){
       'compass',
       'concat:dev',
       'concat:vendor',
-      'copy:statics',
-      'imagemin'
+      'copy:statics'
     ]);
 };
 
