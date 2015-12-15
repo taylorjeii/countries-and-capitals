@@ -50,7 +50,7 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
         params: {
           username: 'atoburen',
           lang: "en",
-          maxRows: 1,
+          // maxRows: 1,
           q: capital,
           name_equals: capital,
           country: country,
