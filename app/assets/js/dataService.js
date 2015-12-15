@@ -62,7 +62,7 @@ angular.module('app').factory('dataService', ['$q', '$http', 'COUNTRY_DATA_URL',
               .catch(sendErrorMessage);
 
         function sendCapital (response) {
-        return response.data.geonames;
+        return response.data.geonames[0];
       }
     }
 
