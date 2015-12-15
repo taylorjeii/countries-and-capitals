@@ -1,7 +1,23 @@
-angular.module('app', ['ngRoute'])
+angular.module('app', ['ngRoute', 'uiGmapgoogle-maps'])
   .constant('COUNTRY_DATA_URL', 'http://api.geonames.org/countryInfoJSON')
   .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON')
   .constant('NEIGHBORS_DATA_URL', 'http://api.geonames.org/neighboursJSON');
+
+// angular.module('app')
+//   .run(function($rootScope, $location, $timeout) {
+//     $rootScope.$on('$routeChangeError', function() {
+//         $location.path("/error");
+//     });
+//     $rootScope.$on('$routeChangeStart', function() {
+//         $rootScope.isLoading = true;
+//     });
+//     $rootScope.$on('$routeChangeSuccess', function() {
+//       $timeout(function() {
+//         $rootScope.isLoading = false;
+//       }, 1000);
+//     });
+// });
+
 
 
 angular.module('app').config(['$routeProvider', function ($routeProvider){
@@ -35,10 +51,10 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
         return dataService.getNeighbors(country);
       }]
     }
+  })
+  .otherwise({
+    redirectTo: '/'
   });
-  // .otherwise({
-  //   redirectTo: '/'
-  // });
 }]);
 
 

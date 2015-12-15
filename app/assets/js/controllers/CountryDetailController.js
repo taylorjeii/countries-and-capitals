@@ -4,9 +4,12 @@ function CountryDetailController($scope, country, countryCapital, countryNeighbo
   $scope.country = country;
   $scope.capital = countryCapital;
   $scope.neighbors = countryNeighbors;
-  console.log($scope.neighbors);
-  // $scope.capital = $routeParams.capital;
-  // $scope.capitalPopulation = capitalPopulation;
-  // $scope.countryNeighbors = countryNeighbors;
 
+  var longitude = $scope.capital.lng;
+  var latitude = $scope.capital.lat;
+  $scope.map = { center: { latitude: latitude, longitude: longitude }, zoom: 8 };
+
+
+
+  console.log( 'longitude: ' + longitude + ' latitude: ' + latitude);
 }
