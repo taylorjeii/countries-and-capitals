@@ -4,7 +4,6 @@ module.exports = function (grunt){
 
     pkg: grunt.file.readJSON('package.json'),
 
-
      // watch
     //--------------------------------------------------------------
     // Watches for changed files and runs appropriate tasks
@@ -24,8 +23,6 @@ module.exports = function (grunt){
       }
     },
 
-
-
     // jshint, find errors in javascript code
     jshint: {
       options: {
@@ -39,7 +36,7 @@ module.exports = function (grunt){
       ]
     },
 
-    // uglify
+    // uglify, compress javascript code
     uglify: {
       development: {
           files: [{
@@ -102,23 +99,6 @@ module.exports = function (grunt){
         }
       }
     },
-    // html hint
-    htmlhint: {
-      templates:{
-        options:{
-          'attr-lower-case': true,
-          'attr-value-not-empty': true,
-          'tag-pair': true,
-          'tag-self-close': true,
-          'tagname-lowercase': true,
-          'id-class-unique': true,
-          'src-not-empty': true,
-          'img-alt-required': true
-
-        },
-        src: ['./app/**/*.html']
-      }
-    },
 
     // copy over static files not moved in other tasks
     copy: {
@@ -160,7 +140,6 @@ module.exports = function (grunt){
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-htmlhint');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask("default", [

@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'uiGmapgoogle-maps'])
+angular.module('app', ['ngRoute', 'ngAnimate', 'uiGmapgoogle-maps'])
   .constant('COUNTRY_DATA_URL', 'http://api.geonames.org/countryInfoJSON')
   .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON')
   .constant('NEIGHBORS_DATA_URL', 'http://api.geonames.org/neighboursJSON');
@@ -17,8 +17,6 @@ angular.module('app')
       }, 1000);
     });
 });
-
-
 
 angular.module('app').config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
