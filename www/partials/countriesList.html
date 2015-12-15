@@ -11,7 +11,7 @@
     <th>Population</th>
   </tr>
   <tr ng-repeat="country in countries">
-    <td><a ng-href="#/details/{{country.countryName}}/{{country.capital}}" class="country-name">{{country.countryName}}</a></td>
+    <td><a ng-href="#/details/{{country.countryCode}}/{{country.capital}}" class="country-name">{{country.countryName}}</a></td>
     <td>{{country.countryCode}}</td>
     <td>{{country.capital}}</td>
     <td>{{country.areaInSqKm | number:0}}</td>

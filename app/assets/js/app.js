@@ -1,10 +1,25 @@
-angular.module('app', ['ngRoute'])
+angular.module('app', ['ngRoute', 'uiGmapgoogle-maps'])
   .constant('COUNTRY_DATA_URL', 'http://api.geonames.org/countryInfoJSON')
-  .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON');
+  .constant('CAPITAL_DATA_URL', 'http://api.geonames.org/searchJSON')
+  .constant('NEIGHBORS_DATA_URL', 'http://api.geonames.org/neighboursJSON');
+
+// angular.module('app')
+//   .run(function($rootScope, $location, $timeout) {
+//     $rootScope.$on('$routeChangeError', function() {
+//         $location.path("/error");
+//     });
+//     $rootScope.$on('$routeChangeStart', function() {
+//         $rootScope.isLoading = true;
+//     });
+//     $rootScope.$on('$routeChangeSuccess', function() {
+//       $timeout(function() {
+//         $rootScope.isLoading = false;
+//       }, 1000);
+//     });
+// });
 
 
 
- // Route configurations
 angular.module('app').config(['$routeProvider', function ($routeProvider){
   $routeProvider.when('/', {
     templateUrl: 'partials/home.html'
@@ -22,11 +37,26 @@ angular.module('app').config(['$routeProvider', function ($routeProvider){
     templateUrl: 'partials/country.html',
     controller: 'CountryDetailController',
     resolve: {
+<<<<<<< HEAD
       population: ['$route', 'dataService', function($route, dataService){
         var country = $route.current.params.country;
         var capital = $route.current.params.capital;
         console.log(capital);
         return dataService.getCapitalPopulation(country, capital);
+=======
+      country: ['$route', 'dataService', function($route, dataService){
+        var country = $route.current.params.country;
+        return dataService.getCountry(country);
+      }],
+      countryCapital: ['$route', 'dataService', function($route, dataService){
+        var country = $route.current.params.country;
+        var capital = $route.current.params.capital;
+        return dataService.getCapital(country, capital);
+      }],
+      countryNeighbors: ['$route', 'dataService', function($route, dataService){
+        var country = $route.current.params.country;
+        return dataService.getNeighbors(country);
+>>>>>>> 5890359a77eac87d5f70284d435f49ee16d508fb
       }]
     }
   })

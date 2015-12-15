@@ -80,9 +80,11 @@ module.exports = function (grunt){
       vendor: {
         src: [
           './app/bower_components/jquery/dist/jquery.min.js',
+          './app/bower_components/lodash/lodash.min.js',
           './app/bower_components/angular/angular.min.js',
           './app/bower_components/angular-route/angular-route.min.js',
-          './app/bower_components/angular-utils-pagination/dirPagination.js',
+          './app/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js',
+          './app/bower_components/angular-google-maps/dist/angular-google-maps.min.js',
           './app/bower_components/angular-animate/angular-animate.min.js',
           './app/bower_components/bootstrap/dist/js/bootstrap.min.js'
         ],
@@ -132,6 +134,12 @@ module.exports = function (grunt){
     copy: {
       statics: {
         files: [
+        {
+            expand: true,
+            cwd: './app/assets//',
+            src: ['loading-globe.gif'],
+            dest: 'www/'
+          },
           {
             expand: true,
             cwd: './app/assets/css/vendor/',

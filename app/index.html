@@ -4,8 +4,9 @@
 	<title>Countries and Capitals</title>
 	<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+
 </head>
-<body ng-cloak>
+<body ng-class="{loading: isLoading}" ng-cloak>
   <div class="container">
     <div class="row">
       <div class="col-sm-12 text-center">
@@ -15,7 +16,9 @@
   </div>
 
 
+
   <script src="js/vendors.js"></script>
   <script src="js/scripts.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </body>
 </html>
